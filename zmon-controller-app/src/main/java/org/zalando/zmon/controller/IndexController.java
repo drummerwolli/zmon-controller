@@ -12,6 +12,8 @@ import org.zalando.zmon.config.ControllerProperties;
 import org.zalando.zmon.config.FirebaseProperties;
 import org.zalando.zmon.config.AppdynamicsProperties;
 import org.zalando.zmon.config.InstanaProperties;
+import org.zalando.zmon.config.JaegerProperties;
+import org.zalando.zmon.config.LightstepProperties;
 import org.zalando.zmon.config.GoogleanalyticsProperties;
 import org.zalando.zmon.config.ManifestJsonConfig;
 import org.zalando.zmon.security.permission.DefaultZMonPermissionService;
@@ -38,6 +40,10 @@ public class IndexController {
     public static final String APPDYNAMICS_CONFIG = "appdynamicsConfig";
     public static final String INSTANA_ENABLED = "instanaEnabled";
     public static final String INSTANA_CONFIG = "instanaConfig";
+    public static final String LIGHTSTEP_ENABLED = "lightstepEnabled";
+    public static final String LIGHTSTEP_CONFIG = "lightstepConfig";
+    public static final String JAEGER_ENABLED = "jaegerEnabled";
+    public static final String JAEGER_CONFIG = "jaegerConfig";
     public static final String GOOGLEANALYTICS_ENABLED = "googleanalyticsEnabled";
     public static final String GOOGLEANALYTICS_CONFIG = "googleanalyticsConfig";
     private static final String HAS_SCHEDULE_DOWNTIME_PERMISSION = "hasScheduleDowntimePermission";
@@ -66,6 +72,12 @@ public class IndexController {
 
     @Autowired
     private InstanaProperties instanaProperties;
+
+    @Autowired
+    private LightstepProperties lightstepProperties;
+
+    @Autowired
+    private JaegerProperties jaegerProperties;
 
     @Autowired
     private GoogleanalyticsProperties googleanalyticsProperties;
@@ -101,6 +113,10 @@ public class IndexController {
         model.addAttribute(APPDYNAMICS_ENABLED, controllerProperties.enableAppdynamics);
         model.addAttribute(INSTANA_CONFIG, instanaProperties);
         model.addAttribute(INSTANA_ENABLED, controllerProperties.enableInstana);
+        model.addAttribute(LIGHTSTEP_CONFIG, lightstepProperties);
+        model.addAttribute(LIGHTSTEP_ENABLED, controllerProperties.enableLightstep);
+        model.addAttribute(JAEGER_CONFIG, jaegerProperties);
+        model.addAttribute(JAEGER_ENABLED, controllerProperties.enableJaeger);
         model.addAttribute(GOOGLEANALYTICS_CONFIG, googleanalyticsProperties);
         model.addAttribute(GOOGLEANALYTICS_ENABLED, controllerProperties.enableGoogleanalytics);
 

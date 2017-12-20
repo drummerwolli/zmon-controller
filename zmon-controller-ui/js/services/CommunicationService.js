@@ -74,8 +74,12 @@ angular.module('zmon2App').factory('CommunicationService', ['$http', '$q', '$log
                 params.tags = filter.tags;
             }
 
-            return doHttpCall("GET", "rest/allAlerts", params, null, timeout);
+            return doHttpCall("GET", "rest/allAlertsWithoutEntities", params, null, timeout);
         };
+
+        service.getRedisLimit = function() {
+            return doHttpCall("GET", "https://s3.eu-central-1.amazonaws.com/redis-limit/redis-limit.txt");
+        }
 
         /*
          * Get alerts by ID.
@@ -120,6 +124,27 @@ angular.module('zmon2App').factory('CommunicationService', ['$http', '$q', '$log
                 params.limit = limitCount;
             }
             return doHttpCall("GET", "rest/checkResults", params, null, timeout);
+        };
+
+        /*
+         * Returns check results for passed checkId with optional limitCount & entityId filter without entity information
+         */
+        service.getCheckResultsWithoutEntities = function(checkId, entityId, limitCount) {
+            PreconditionsService.isNotEmpty(checkId);
+            PreconditionsService.isNumber(checkId);
+            var params = {
+                "check_id": checkId
+            };
+            var timeout = 5000;
+            if (entityId) {
+                PreconditionsService.isNumber(entityId);
+                params.entity = entityId;
+            }
+            if (limitCount) {
+                PreconditionsService.isNumber(limitCount);
+                params.limit = limitCount;
+            }
+            return doHttpCall("GET", "rest/checkResultsWithoutEntities", params, null, timeout);
         };
 
         /*
