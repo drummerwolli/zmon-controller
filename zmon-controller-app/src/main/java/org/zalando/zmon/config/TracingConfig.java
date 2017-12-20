@@ -14,23 +14,6 @@ public class TracingConfig {
     private int samplerParam;
     private String serviceName;
 
-    @Bean
-    public Tracer tracer() {
-
-        com.uber.jaeger.Configuration.SamplerConfiguration samplerConfiguration
-                = new com.uber.jaeger.Configuration.SamplerConfiguration(samplerType, samplerParam);
-
-        com.uber.jaeger.Configuration.ReporterConfiguration reporterConfiguration
-                = com.uber.jaeger.Configuration.ReporterConfiguration.fromEnv();
-
-        com.uber.jaeger.Configuration configuration
-                = new com.uber.jaeger.Configuration(serviceName, samplerConfiguration, reporterConfiguration);
-
-        Tracer tracer = configuration.getTracer();
-        GlobalTracer.register(tracer);
-        return tracer;
-    }
-
     public String getSamplerType() {
         return samplerType;
     }

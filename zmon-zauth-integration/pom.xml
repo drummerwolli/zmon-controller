@@ -62,14 +62,9 @@
             <version>0.0.7</version>
         </dependency>
         <dependency>
-            <groupId>com.uber.jaeger</groupId>
-            <artifactId>jaeger-core</artifactId>
-            <version>0.22.0-RC2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.uber.jaeger</groupId>
-            <artifactId>jaeger-jaxrs2</artifactId>
-            <version>0.22.0-RC2</version>
+            <groupId>com.instana</groupId>
+            <artifactId>instana-java-opentracing</artifactId>
+            <version>0.100.500</version>
         </dependency>
         <dependency>
             <groupId>io.opentracing.contrib</groupId>

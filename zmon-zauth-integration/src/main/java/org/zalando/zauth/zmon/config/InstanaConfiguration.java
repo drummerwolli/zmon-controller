@@ -1,0 +1,20 @@
+package org.zalando.zauth.zmon.config;
+
+import com.instana.opentracing.InstanaTracer;
+import io.opentracing.Tracer;
+import io.opentracing.util.ThreadLocalActiveSpanSource;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * Created by elauria on 07/09/17.
+ */
+@Configuration
+@EnableConfigurationProperties({InstanaProperties.class})
+public class InstanaConfiguration {
+    @Bean
+    public Tracer instanaTracer() {
+        return new InstanaTracer(new ThreadLocalActiveSpanSource());
+    }
+}
